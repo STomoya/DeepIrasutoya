@@ -1,0 +1,11 @@
+lxml
+beautifulsoup4
+selenium
+requests
+torch
+torchvision
+scikit-learn
+matplotlib
+tqdm
+jupyter
+flask

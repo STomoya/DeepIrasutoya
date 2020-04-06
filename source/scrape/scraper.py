@@ -42,7 +42,6 @@ class Scraper():
         '''
         request url and convert to soup
         '''
-        self.wait()
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'lxml')
         return soup
@@ -75,7 +74,6 @@ class Scraper():
         '''
         save image
         '''
-        self.wait()
         if image_url == None:
             url = self.image_urls[self.image_index]
         else:
@@ -92,17 +90,18 @@ class Scraper():
         scrape images one by one
         '''
         self.image_index += 1
-        if self.image_index == len(self.image_urls):    # when we reach the final image
+        if self.image_index >= len(self.image_urls):    # when we reach the final image
             self.image_index = 0                        # init image index
             self.entry_index += 1                       # look at next entry
-            if self.entry_index == len(self.entry_urls):    # when we reach the final entry
+            if self.entry_index >= len(self.entry_urls):    # when we reach the final entry
                 self.entry_index = 0                        # init entry index
                 if self.next_page == None:                      # when we reach the end
                     print('we have reached the end')
-                    exit()
+                    return False
                 page_soup = self.get(self.next_page)
                 self.find_entries(page_soup)                # update entry list
                 print('looking at ', self.next_page)
+                print(self.current_filename)
                 self.find_next(page_soup)
             entry_soup = self.get(self.entry_urls[self.entry_index])
             self.find_images(entry_soup)                # update image list
@@ -111,12 +110,28 @@ class Scraper():
         
 if __name__=='__main__':
     
-    scraper = Scraper('https://www.irasutoya.com/search?updated-max=2020-03-12T13:00:00%2B09:00&max-results=1')
-    
-    start = time.time()
-    for i in range(3):
-        filename = '{}.png'.format(i)
-        scraper.save_image(filename)
-        scraper.next()
+    scraper = Scraper('https://www.irasutoya.com/search?updated-max=2015-04-15T15:00:00%2B09:00&max-results=10000&start=14962&by-date=false')
 
-    print(time.time() - start)
+    save_dir = '/usr/src/data/images/'
+
+    id = 20310
+
+    while True:
+        try:
+            filename = save_dir + str(id).zfill(8) + '.png'
+            url = scraper.save_image(filename)
+            next_image = scraper.next()
+
+            with open('/usr/src/data/url_filename.csv', 'a', encoding='utf-8') as fout:
+                fout.write(','.join([filename, url]) + '\n')
+
+            id += 1
+        except Exception as e:
+            print(e)
+            next_image = scraper.next()
+
+        if not next_image:
+            break
+
+            
+        

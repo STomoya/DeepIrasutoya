@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>IrasutoyaAnnotator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-md-8">
+                    <img src="{{ image_src }}" alt="image" class="card-image">
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <form action="/annotate" method="post">
+                            Cleaness
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="cleaness" id="clean">
+                                <label class="form-check-label" for="clean">clean</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="cleaness" id="dirty">
+                                <label class="form-check-label" for="dirty">dirty</label>
+                            </div>
+                            <br>
+                            Gender
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="male">
+                                <label class="form-check-label" for="male">male</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="female">
+                                <label class="form-check-label" for="female">female</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="nogender">
+                                <label class="form-check-label" for="nogender">nogender</label>
+                            </div>
+                            <br>
+                            What
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="what" id="person">
+                                <label class="form-check-label" for="person">person</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="what" id="people">
+                                <label class="form-check-label" for="people">people</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="what" id="object">
+                                <label class="form-check-label" for="object">object</label>
+                            </div>
+                            <br>
+                            negaposi
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="negaposi" id="positive">
+                                <label class="form-check-label" for="positive">positive</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="negaposi" id="negative">
+                                <label class="form-check-label" for="negative">negative</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="negaposi" id="neutral">
+                                <label class="form-check-label" for="neutral">neutral</label>
+                            </div>
+                            <br>
+                            <button class="btn btn-primary" type="submit">SUBMIT</button>
+                        </form>
+                        <br>
+                        <form action="/skip" method="post">
+                            <button class="btn btn-primary" type="submit">SKIP</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

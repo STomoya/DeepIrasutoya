@@ -10,7 +10,7 @@ The main contributions of this repository are,
 ## Todos
 
 - [ ] Dataset
-    - [ ] image scraping
+    - [x] image scraping
     - [ ] annotation
     - [ ] toward easier scraping
 - [ ] deep
